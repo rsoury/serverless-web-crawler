@@ -1,8 +1,5 @@
 Outputs:
-  NotificationsTopic:
-    Description: "The ARN of the StateMachine Notifications Service"
-    Value: !Ref WebCrawlNotificationsTopic
   WebCrawl:
     Description: "The ARN of the StateMachine WebCrawl"
     Value:
-      Ref: WebCrawl
+      Ref: CrawlStateMachine

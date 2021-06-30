@@ -1,4 +1,4 @@
-id: Crawl
+id: CrawlStateMachine
 events:
   - http:
       path: "/"
@@ -13,13 +13,13 @@ events:
   #       executionName.$: $$.Execution.Name
 notifications:
   ABORTED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   FAILED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   TIMED_OUT:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   SUCCEEDED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
 role:
   Fn::GetAtt: [StateMachinePassRole, Arn]
 definition:
@@ -46,9 +46,12 @@ definition:
                 - start
                 - --run
                 - screenshot #! Please change this to use your crawl script
-                - --cloud
+                - --params
+                - url=$$.Execution.Input.url
                 - --concurrency
                 - "1"
+                - -s
+                - s3
               Environment:
                 - Name: EXECUTION_ID
                   Value.$: $$.Execution.Id

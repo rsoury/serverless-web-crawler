@@ -5,5 +5,5 @@ Resources:
       DisplayName: "Serverless Web Crawler Notifications"
       TopicName: ServerlessWebCrawlerNotifications
       Subscription:
-        - Endpoint: ${env:NOTIFY_EMAIL}
+        - Endpoint: "ryan@webdoodle.com.au"
           Protocol: email

@@ -77,6 +77,23 @@ This repository is full of features to simplify getting started with a Serverles
 
 Use the script provided: `./bin/deploy_container.sh`
 
+## Developing a Crawl Script
+
+Refer to the example Crawl Script that takes a Screenshot of the URL provided through a parameter - `./scripts/screenshot.js`  
+Create new scripts by creating a new file in `./scripts/` folder, then exporting an `async function(){}` 
+
+## Deploy to AWS
+
+```shell
+yarn deploy
+```
+
+You can execute the deployed API (if you've used a HTTP event to trigger the state machine) like so:
+
+```shell
+curl https://5jh0zty1c3.execute-api.ap-southeast-2.amazonaws.com/prod/ -X POST -d '{"url": "https://www.webdoodle.com.au/"}'
+```
+
 ## Example State Machine Definition
 
 ```yaml
@@ -95,13 +112,13 @@ events:
   #       executionName.$: $$.Execution.Name
 notifications:
   ABORTED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   FAILED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   TIMED_OUT:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
   SUCCEEDED:
-    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+    - sns: !Ref WebCrawlNotificationsTopic
 role:
   Fn::GetAtt: [StateMachinePassRole, Arn]
 definition:

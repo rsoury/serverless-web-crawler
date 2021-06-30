@@ -35,6 +35,7 @@
 		"dev": "cross-env NODE_ENV=development node --trace-warnings ./lib/index",
 		"clean": "run-p clean:*",
 		"clean:debug": "del ./debug",
+		"deploy": "sls deploy -s prod --env production",
 		"format": "prettier \"lib/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --write",
 		"lint": "eslint -c ./.eslintrc.js \"{lib,test}/**/*.{js,jsx,ts,tsx}\"",
 		"test": "echo \"Add unit tests\""
