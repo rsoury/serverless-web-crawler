@@ -42,7 +42,7 @@ definition:
         Overrides:
           ContainerOverrides:
             - Name: "#{ServiceName}"
-              Command.$: $$.Execution.Input.command
+              Command.$: $$.Execution.Input.command  # For more information on Contact Object, see https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
               Environment:
                 - Name: EXECUTION_ID
                   Value.$: $$.Execution.Id
