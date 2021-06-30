@@ -8,9 +8,15 @@ const fs = require("fs").promises;
 
 const { Crawler } = require("../lib/crawler");
 const logger = require("../lib/logger");
-const { useS3Storage, s3BucketName } = require("../lib/constants");
+const {
+	useS3Storage,
+	s3BucketName,
+	awsCredentials
+} = require("../lib/constants");
 
-const s3client = new S3();
+const s3client = awsCredentials.accessKeyId
+	? new S3({ ...awsCredentials })
+	: new S3();
 
 async function ScreenshotScript(params) {
 	const crawler = await Crawler();

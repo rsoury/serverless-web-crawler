@@ -14,6 +14,17 @@ AWS Step Functions is also serverless by default, requiring no compute resources
 
 ## Getting Started
 
+### Set up your environment file
+
+1. Copy `.env.example` to `.env.development` or `.env.production` depending on which environment you're configuring
+2. Add your values to the environment dotenv file.
+
+#### Environment Variables vs Argument Parameters
+
+It's important to distinguish between Environment and Argument parameters.
+Environment variables should configure how the crawler interfaces with its environment. This includes where it transmits data, which email is notified via SNS, which AWS Credentials to use, etc.
+Argument parameters should configure how the crawler operates. These are settings that directly change the way the crawler runs. This includes modifying how many concurrent browsers/requests are executed, whether TOR is used, which storage mechanism to use, etc.
+
 ### Local
 
 In Development:
@@ -25,10 +36,12 @@ yarn dev -r screenshot -p url=https://www.webdoodle.com.au/ --with-ui
 In Production:
 
 ```shell
-yarn dev -r screenshot -p url=https://www.webdoodle.com.au/ --with-ui
+yarn start -r screenshot -p url=https://www.webdoodle.com.au/ --with-ui
 ```
 
 ### Docker
+
+The Docker Image will only work for a production environment. Be sure to configure your `.env.production` dotenv file before building your Docker Image
 
 Build Docker Image
 
@@ -39,9 +52,8 @@ docker build -t serverless-web-crawl:latest .
 Run Docker Container Locally
 
 ```shell
-
+docker run --rm -it serverless-web-crawl:latest start -r screenshot -p url=https://www.webdoodle.com.au/ -s s3
 ```
-
 
 ## Features
 
