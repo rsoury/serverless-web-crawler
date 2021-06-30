@@ -12,10 +12,16 @@ AWS Step Functions serve as a really good initiator for Fargate processes as the
 AWS Step Functions can also trigger Notifications via SNS for when processes fail or complete.
 AWS Step Functions is also serverless by default, requiring no compute resources until it's executed.
 
+## Getting Started
+
+```
+yarn start -r screenshot -p url=http://google.com --with-ui
+```
+
 ## Features
 
 This repository is full of features to simplify getting started with a Serverless Web Crawl.
-  
+
 - Puppeteer Concurrency using `puppeteer-cluster`
 - Puppeteer Addons using `puppeteer-extra`
 - User Agent Masking

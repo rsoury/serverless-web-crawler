@@ -25,4 +25,4 @@ const evaluate = (page, ...params) => browserFn => {
 	);
 };
 
-export default evaluate;
+module.exports = evaluate;
