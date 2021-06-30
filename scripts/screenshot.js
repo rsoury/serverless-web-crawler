@@ -2,7 +2,7 @@
  * This is an example script to demonstrate the library.
  */
 
-const Crawler = require("../lib/crawler");
+const { Crawler } = require("../lib/crawler");
 const logger = require("../lib/logger");
 
 const navigate = require("./utils/navigate");

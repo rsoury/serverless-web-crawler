@@ -8,8 +8,8 @@ module.exports = {
 		window: "readonly"
 	},
 	extends: [
-		"airbnb-base",
-		"plugin:prettier/recommended",
+		"eslint:recommended",
+		"plugin:node/recommended",
 		"prettier",
 		"plugin:import/errors",
 		"plugin:import/warnings"
@@ -38,6 +38,9 @@ module.exports = {
 		"no-template-curly-in-string": 0,
 		"no-underscore-dangle": 0,
 		"class-methods-use-this": 0,
-		"no-param-reassign": 0
+		"no-param-reassign": 0,
+		"no-await-in-loop": 0,
+		"no-plusplus": 0,
+		"import/no-dynamic-require": 0
 	}
 };

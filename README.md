@@ -3,9 +3,9 @@
 Serverlessly run a Web Crawler job for an indefinite amount of time.
 Perfect for Crawling Jobs that are greater than a minute and only need to be executed a once or twice a month.
 
-This is a boilerplate library deploys a completely severless workflow to AWS that allows for multi-step web crawling.
+This boilerplate library can be used to deploy a completely severless workflow to AWS that allows for multi-step web crawling.
 It runs a web crawler in a Docker Container that is managed by AWS Fargate.
-The AWS Fargate crawler container is triggered in an AWS Step Functions Workflow.
+The AWS Fargate proceess is triggered in an AWS Step Functions Workflow.
 This allows you to extend the workflow and prepare data for the Web Crawler or manipulate the data produced by the Web Crawler.
 
 AWS Step Functions serve as a really good initiator for Fargate processes as they can be triggered by a schedule or a HTTP Request.
