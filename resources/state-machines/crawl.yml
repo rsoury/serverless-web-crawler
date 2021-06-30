@@ -42,16 +42,7 @@ definition:
         Overrides:
           ContainerOverrides:
             - Name: "#{ServiceName}"
-              Command:
-                - start
-                - --run
-                - screenshot #! Please change this to use your crawl script
-                - --params
-                - url=$$.Execution.Input.url
-                - --concurrency
-                - "1"
-                - -s
-                - s3
+              Command.$: $$.Execution.Input.command
               Environment:
                 - Name: EXECUTION_ID
                   Value.$: $$.Execution.Id
