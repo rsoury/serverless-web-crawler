@@ -21,8 +21,8 @@ AWS Step Functions is also serverless by default, requiring no compute resources
 
 #### Environment Variables vs Argument Parameters
 
-It's important to distinguish between Environment and Argument parameters.
-Environment variables should configure how the crawler interfaces with its environment. This includes where it transmits data, which email is notified via SNS, which AWS Credentials to use, etc.
+It's important to distinguish between Environment and Argument parameters.  
+Environment variables should configure how the crawler interfaces with its environment. This includes where it transmits data, which email is notified via SNS, which AWS Credentials to use, etc.  
 Argument parameters should configure how the crawler operates. These are settings that directly change the way the crawler runs. This includes modifying how many concurrent browsers/requests are executed, whether TOR is used, which storage mechanism to use, etc.
 
 ### Local
@@ -54,6 +54,12 @@ Run Docker Container Locally
 ```shell
 docker run --rm -it serverless-web-crawl:latest start -r screenshot -p url=https://www.webdoodle.com.au/ -s s3
 ```
+
+### Passing Parameters
+
+To learn what parameters can be passed to the crawler, please see `./lib/constants`  
+Environment variables are set here `./lib/constants/env.js`  
+Argument parameters are set here `./lib/constants/args.js`
 
 ## Features
 
