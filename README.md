@@ -91,7 +91,7 @@ yarn deploy
 You can execute the deployed API (if you've used a HTTP event to trigger the state machine) like so:
 
 ```shell
-curl https://5jh0zty1c3.execute-api.ap-southeast-2.amazonaws.com/prod/ -X POST -d '{"command": ["start", "--run", "screenshot", "--params", "url=https://google.com/", "--concurrency", "1", "--storage", "s3"]}'
+curl https://5jh0zty1c3.execute-api.ap-southeast-2.amazonaws.com/prod/ -X POST -d '{"command": ["start", "--run", "screenshot", "--params", "url=https://www.webdoodle.com.au/", "--concurrency", "1", "--storage", "s3"]}'
 ```
 
 ## Example State Machine Definition
