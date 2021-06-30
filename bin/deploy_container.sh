@@ -44,7 +44,8 @@ fi
 
 echo 'Login to ECR Repository...'
 
-$(aws ecr get-login --no-include-email --region $REGION --profile $AWS_PROFILE)
+AWS_ECR_PASSWORD=$(aws ecr get-login-password --region $REGION --profile $AWS_PROFILE)
+docker login --username AWS --password $AWS_ECR_PASSWORD $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 
 echo 'Building and pushing docker image to ECR repository...'
 docker build -t $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$TAG .

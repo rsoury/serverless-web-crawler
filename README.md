@@ -54,6 +54,10 @@ Run Docker Container Locally
 docker run --rm -it serverless-web-crawl:latest start -r screenshot -p url=https://www.webdoodle.com.au/ -s s3
 ```
 
+#### AWS ECR Settings
+
+To configure settings used to push the Docker Image to AWS ECR, please see `./bin/deploy_container.sh`
+
 ### Passing Parameters
 
 To learn what parameters can be passed to the crawler, please see `./lib/constants`  
