@@ -1,7 +1,6 @@
 # Serverless Web Crawler
 
-Serverlessly run a Web Crawler job for an indefinite amount of time.
-Perfect for Crawling Jobs that are greater than a minute and only need to be executed a once or twice a month.
+Serverless Web Crawler that executes for an indefinite amount of time. Perfect for Crawling Jobs that last longer than a minute and only need to be executed once or twice a month.
 
 This boilerplate library can be used to deploy a completely severless workflow to AWS that allows for multi-step web crawling.
 It runs a web crawler in a Docker Container that is managed by AWS Fargate.
