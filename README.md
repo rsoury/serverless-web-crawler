@@ -14,9 +14,34 @@ AWS Step Functions is also serverless by default, requiring no compute resources
 
 ## Getting Started
 
+### Local
+
+In Development:
+
+```shell
+yarn dev -r screenshot -p url=https://www.webdoodle.com.au/ --with-ui
 ```
-yarn start -r screenshot -p url=http://google.com --with-ui
+
+In Production:
+
+```shell
+yarn dev -r screenshot -p url=https://www.webdoodle.com.au/ --with-ui
 ```
+
+### Docker
+
+Build Docker Image
+
+```shell
+docker build -t serverless-web-crawl:latest .
+```
+
+Run Docker Container Locally
+
+```shell
+
+```
+
 
 ## Features
 

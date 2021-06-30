@@ -14,15 +14,9 @@ provider:
   memorySize: 512
   timeout: 900
   stage: ${opt:stage, 'dev'}
-  # iamRoleStatements:
-  #   - Effect: "Allow"
-  #     Action:
-  #       - "s3:*Object"
-  #     Resource: "arn:aws:s3:::your-bucket*/*"
   environment:
     NODE_ENV:
       ${self:custom.nodeEnv.${opt:stage, self:provider.stage}, 'development'}
-    # S3_BUCKET_NAME: your-bucket
 
 package:
   exclude:
@@ -37,7 +31,8 @@ plugins:
   - serverless-plugin-common-excludes
   - serverless-pseudo-parameters
   - serverless-step-functions
-  - serverless-dotenv-plugin # Learn more here https://www.serverless.com/plugins/serverless-dotenv-plugin
+  - serverless-dotenv-plugin # Learn more - https://www.serverless.com/plugins/serverless-dotenv-plugin
+  - serverless-plugin-ifelse # Learn more - https://www.serverless.com/plugins/serverless-plugin-ifelse
   - serverless-offline
 
 custom:
@@ -46,6 +41,14 @@ custom:
     prod: production
   serverless-offline:
     port: 9000
+  serverlessIfElse:
+    - If: '"${env:S3_BUCKET_NAME}" != ""'
+      Set:
+        provider.iamRoleStatements:
+          - Effect: "Allow"
+            Action:
+              - "s3:*Object"
+            Resource: "arn:aws:s3:::${env:S3_BUCKET_NAME}*/*"
 
 # functions:
 
@@ -59,5 +62,5 @@ resources:
   - ${file(resources/conditions.yml)}
   - ${file(resources/fargate.yml)}
   - ${file(resources/iam.yml)}
-  # - ${file(resources/sns.yml)}
+  - ${file(resources/sns.yml)}
   - ${file(resources/outputs.yml)}

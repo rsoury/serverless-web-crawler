@@ -25,6 +25,8 @@ yarn-error.log*
 # output
 /logs
 /debug
-/cache
-/cache*
+cache/*
+!cache/.gitkeep
+output/*
+!output/.gitkeep
 screenshot.jpg
