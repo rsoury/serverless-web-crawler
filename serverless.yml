@@ -1,0 +1,63 @@
+# Fargate CloudFormation resources based on: https://github.com/ryfeus/stepfunctions2processing/blob/master/aws-fargate/serverless.yml
+# Fargate based Puppeteer based on: https://dev.to/hoangleitvn/building-serverless-web-crawler-with-puppeteer-on-aws-fargate-22k3
+
+service: serverless-web-crawler
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: ">=1.28.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ${opt:region, 'ap-southeast-2'}
+  memorySize: 512
+  timeout: 900
+  stage: ${opt:stage, 'dev'}
+  # iamRoleStatements:
+  #   - Effect: "Allow"
+  #     Action:
+  #       - "s3:*Object"
+  #     Resource: "arn:aws:s3:::your-bucket*/*"
+  environment:
+    NODE_ENV:
+      ${self:custom.nodeEnv.${opt:stage, self:provider.stage}, 'development'}
+    # S3_BUCKET_NAME: your-bucket
+
+package:
+  exclude:
+    - bin/**
+    - cache/**
+    - debug/**
+    - logs/**
+    - test/**
+
+plugins:
+  - serverless-plugin-include-dependencies
+  - serverless-plugin-common-excludes
+  - serverless-pseudo-parameters
+  - serverless-step-functions
+  - serverless-dotenv-plugin # Learn more here https://www.serverless.com/plugins/serverless-dotenv-plugin
+  - serverless-offline
+
+custom:
+  nodeEnv:
+    dev: development
+    prod: production
+  serverless-offline:
+    port: 9000
+
+# functions:
+
+stepFunctions:
+  validate: true
+  stateMachines:
+    Crawl: ${file(resources/state-machines/crawl.yml)}
+
+resources:
+  - ${file(resources/parameters.yml)}
+  - ${file(resources/conditions.yml)}
+  - ${file(resources/fargate.yml)}
+  - ${file(resources/iam.yml)}
+  # - ${file(resources/sns.yml)}
+  - ${file(resources/outputs.yml)}

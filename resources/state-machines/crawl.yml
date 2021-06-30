@@ -1,0 +1,57 @@
+id: Crawl
+events:
+  - http:
+      path: "/"
+      method: "POST"
+  # - schedule:
+  #     rate: rate(24 hours)
+  #     enabled:
+  #       # ${self:custom.scheduleEnabled.${opt:stage, self:provider.stage}, false}
+  #       false
+  #     input:
+  #       executionId.$: $$.Execution.Id
+  #       executionName.$: $$.Execution.Name
+notifications:
+  ABORTED:
+    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+  FAILED:
+    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+  TIMED_OUT:
+    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+  SUCCEEDED:
+    - sns: ${self:resources.Outputs.NotificationsTopic.Value}
+role:
+  Fn::GetAtt: [StateMachinePassRole, Arn]
+definition:
+  Comment: "Serverless Web Crawl"
+  StartAt: WebCrawl
+  States:
+    WebCrawl:
+      Type: Task
+      Resource: "arn:aws:states:::ecs:runTask.sync"
+      Parameters:
+        LaunchType: "FARGATE"
+        Cluster: "#{ECSCluster}"
+        TaskDefinition: "#{FargateTaskDefinition}"
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets:
+              - "#{PublicSubnetOne}"
+              - "#{PublicSubnetTwo}"
+            AssignPublicIp: ENABLED
+        Overrides:
+          ContainerOverrides:
+            - Name: "#{ServiceName}"
+              Command:
+                - start
+                - --run
+                - products
+                - --cloud
+                - --concurrency
+                - "1"
+              Environment:
+                - Name: EXECUTION_ID
+                  Value.$: $$.Execution.Id
+                - Name: EXECUTION_NAME
+                  Value.$: $$.Execution.Name
+      End: true

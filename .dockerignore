@@ -1,0 +1,8 @@
+bin/
+.vscode/
+node_modules/
+.serverless
+cache/
+debug/
+logs/
+test/

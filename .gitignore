@@ -1,0 +1,29 @@
+# dependencies
+/node_modules
+jspm_packages
+/flow-typed
+/.pnp
+.pnp.js
+
+# testing
+/.test_temp
+/coverage
+
+# misc
+.DS_Store
+.env.*
+!.env.example
+package.json.lerna_backup
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# serverless
+.serverless
+
+# output
+/logs
+/debug
+/cache
+/cache*

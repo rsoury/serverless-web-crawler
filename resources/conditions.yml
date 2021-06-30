@@ -1,0 +1,2 @@
+Conditions:
+  HasCustomRole: !Not [!Equals [!Ref "Role", ""]]

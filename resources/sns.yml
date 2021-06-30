@@ -1,0 +1,9 @@
+Resources:
+  WebCrawlNotificationsTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: "Serverless Web Crawler Notifications"
+      TopicName: ServerlessWebCrawlerNotifications
+      Subscription:
+        - Endpoint: ${env:NOTIFY_EMAIL}
+          Protocol: email
